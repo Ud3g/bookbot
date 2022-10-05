@@ -1,4 +1,5 @@
 import os
+from tabnanny import verbose
 
 def get_textfile_names() -> list:
     """
@@ -35,7 +36,7 @@ def count_words(text: str) -> int:
     return text.split(sep=None, maxsplit=None)
 
 
-def count_letters(text: str) -> dict:
+def count_characters(text: str) -> dict:
     """
     Counts the appearance of single characters inside a text.
     Input: text (string)
@@ -53,16 +54,27 @@ def count_letters(text: str) -> dict:
     return charcount
 
 
-def assemble_report() -> str:
+def assemble_report(verbose_filename: str, wordcount: int, charcount: dict) -> str:
     """
     Assembles a report on a textfile.
-    Input: verbose_filename (str), wourdcount (int), charcount(dict)
+    Input: verbose_filename (str), wordcount (int), charcount(dict)
     Returns: Report (str)
     """
-    pass
+    report = f"---Reporting on {verbose_filename}.---"
+    report += f"{wordcount} word(s) found in the document.\n"
+    for char in charcount:
+        report += f"Character '{char} was found {charcount[char]} time(s).'"
+    return report
 
 
 def main():
-    pass
+    txt_files = get_textfile_names()
+    opened_text = read_single_txt(txt_files[0])
+    report = assemble_report(
+        txt_files[0],
+        count_words(opened_text),
+        count_characters(opened_text)
+        )
+    print(report)
 
 main()
