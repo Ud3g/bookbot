@@ -1,5 +1,4 @@
 import os
-import string
 
 def get_textfile_names() -> list:
     """
@@ -17,7 +16,7 @@ def get_textfile_names() -> list:
 def read_single_txt(verbose_filename: string) -> string:
     """
     Reads a single text file.
-    Parameter: verbose_filename (string), a combination of path and filename.
+    Input: verbose_filename (string), a combination of path and filename.
     Returns a large string containing the text file content.
     """
     
@@ -29,7 +28,7 @@ def read_single_txt(verbose_filename: string) -> string:
 def count_words(text: string) -> int:
     """
     Counts words of a text.
-    Parameter: text (string)
+    Input: text (string)
     Returns wordcount (integer)
     """
 
@@ -38,9 +37,16 @@ def count_words(text: string) -> int:
 
 def count_letters(text: string) -> dict:
     """
-    Counts the appearance of single letters inside a text.
-    Parameter: text (string)
-    Returns lettercount (dict)
+    Counts the appearance of single characters inside a text.
+    Input: text (string)
+    Returns character count (dict)
     """
 
-    
+    text = text.lower()
+    charcount = {}
+    for char in text:
+        if char in charcount:
+            charcount[char] += 1
+        else:
+            charcount[char] = 1
+    return charcount
