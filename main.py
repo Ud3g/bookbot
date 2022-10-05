@@ -1,5 +1,6 @@
 import os
-from tabnanny import verbose
+
+BOOKS_FOLDER = "./books/"
 
 def get_textfile_names() -> list:
     """
@@ -8,9 +9,9 @@ def get_textfile_names() -> list:
     """
 
     txt_list = []
-    for row in os.listdir("./books/"):
+    for row in os.listdir(BOOKS_FOLDER):
         if row.endswith(".txt"):
-            txt_list.append(row)
+            txt_list.append(BOOKS_FOLDER + row)
     return txt_list
 
 
@@ -33,7 +34,7 @@ def count_words(text: str) -> int:
     Returns wordcount (integer)
     """
 
-    return text.split(sep=None, maxsplit=None)
+    return len(text.split(sep=None))
 
 
 def count_characters(text: str) -> dict:
@@ -50,7 +51,7 @@ def count_characters(text: str) -> dict:
             charcount[char] += 1
         elif char.isalpha():
             charcount[char] = 1
-    charcount = sorted(charcount, reverse=True)
+    # charcount = sorted(charcount, reverse=True)
     return charcount
 
 
@@ -60,10 +61,10 @@ def assemble_report(verbose_filename: str, wordcount: int, charcount: dict) -> s
     Input: verbose_filename (str), wordcount (int), charcount(dict)
     Returns: Report (str)
     """
-    report = f"---Reporting on {verbose_filename}.---"
+    report = f"---Reporting on {verbose_filename}.---\n"
     report += f"{wordcount} word(s) found in the document.\n"
     for char in charcount:
-        report += f"Character '{char} was found {charcount[char]} time(s).'"
+        report += f"\nCharacter '{char} was found {charcount[char]} time(s)."
     return report
 
 
@@ -78,3 +79,4 @@ def main():
     print(report)
 
 main()
+# print(count_characters("Dies ist ein Test!"))
