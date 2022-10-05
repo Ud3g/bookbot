@@ -13,7 +13,7 @@ def get_textfile_names() -> list:
     return txt_list
 
 
-def read_single_txt(verbose_filename: string) -> string:
+def read_single_txt(verbose_filename: str) -> str:
     """
     Reads a single text file.
     Input: verbose_filename (string), a combination of path and filename.
@@ -25,7 +25,7 @@ def read_single_txt(verbose_filename: string) -> string:
     return file_content
 
 
-def count_words(text: string) -> int:
+def count_words(text: str) -> int:
     """
     Counts words of a text.
     Input: text (string)
@@ -35,7 +35,7 @@ def count_words(text: string) -> int:
     return text.split(sep=None, maxsplit=None)
 
 
-def count_letters(text: string) -> dict:
+def count_letters(text: str) -> dict:
     """
     Counts the appearance of single characters inside a text.
     Input: text (string)
@@ -47,6 +47,22 @@ def count_letters(text: string) -> dict:
     for char in text:
         if char in charcount:
             charcount[char] += 1
-        else:
+        elif char.isalpha():
             charcount[char] = 1
+    charcount = sorted(charcount, reverse=True)
     return charcount
+
+
+def assemble_report() -> str:
+    """
+    Assembles a report on a textfile.
+    Input: verbose_filename (str), wourdcount (int), charcount(dict)
+    Returns: Report (str)
+    """
+    pass
+
+
+def main():
+    pass
+
+main()
