@@ -37,11 +37,11 @@ def count_words(text: str) -> int:
     return len(text.split(sep=None))
 
 
-def count_characters(text: str) -> dict:
+def count_characters(text: str) -> list:
     """
     Counts the appearance of single characters inside a text.
     Input: text (string)
-    Returns character count (dict)
+    Returns character count (list of lists)
     """
 
     text = text.lower()
@@ -51,20 +51,21 @@ def count_characters(text: str) -> dict:
             charcount[char] += 1
         elif char.isalpha():
             charcount[char] = 1
-    # charcount = sorted(charcount, reverse=True)
+    charcount = list(zip(charcount.keys(), charcount.values())) 
+    charcount.sort(reverse=True, key=lambda x: x[1])
     return charcount
 
 
-def assemble_report(verbose_filename: str, wordcount: int, charcount: dict) -> str:
+def assemble_report(verbose_filename: str, wordcount: int, charcount: list) -> str:
     """
     Assembles a report on a textfile.
-    Input: verbose_filename (str), wordcount (int), charcount(dict)
+    Input: verbose_filename (str), wordcount (int), charcount(list)
     Returns: Report (str)
     """
     report = f"---Reporting on {verbose_filename}.---\n"
     report += f"{wordcount} word(s) found in the document.\n"
     for char in charcount:
-        report += f"\nCharacter '{char} was found {charcount[char]} time(s)."
+        report += f"\nCharacter '{char[0]} was found {char[1]} time(s)."
     return report
 
 
@@ -79,4 +80,3 @@ def main():
     print(report)
 
 main()
-# print(count_characters("Dies ist ein Test!"))
